@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Code Player</title>
+      
+		<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="player.css" />
+
+</head>
+
+<body>
+<div id="fullbody">
+	<div id="header">
+    	<h3> Code Player </h3>
+    	<div id="toggles">
+        	<ul id="buttons">
+    		<li class="toggle selected">HTML</li>
+    		<li class="toggle">CSS</li>
+    		<li class="toggle ">JavaScript</li>
+    		<li class="toggle selected">Result</li>
+            </ul>
+    	</div>
+        <div id="run">Run</div>
+    </div>
+    
+    <div class="clear"></div>
+    
+    <div class="codeContainer" id="HTMLContainer">
+    	<div class="codeLabel">HTML</div>
+    	<textarea id="htmlCode">Code example</textarea>
+ 
+    </div>
+    
+    <div class="codeContainer" id="CSSContainer">
+    	<div class="codeLabel">CSS</div>
+    	<textarea id="cssCode">Code example</textarea>
+    </div>
+    
+    <div class="codeContainer" id="JavaScriptContainer">
+    	<div class="codeLabel">JS</div>
+    	<textarea id="jsCode">Code example</textarea>
+    </div>
+    
+     <div class="codeContainer" id="ResultContainer">
+     	<div class="codeLabel">Result</div>
+    	<iframe id="frame"></iframe>
+    </div>
+   
+</div>
+
+
+<script src="player.js">
+
+		 
+      </script>
+
+</body>
+</html>

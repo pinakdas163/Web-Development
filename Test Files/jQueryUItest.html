@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQueryUI</title>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<style type="text/css" >
+	
+	#box {
+		background-color:#693;
+		width:150px;
+		height:150px;	
+	}
+	#bigbox {
+		background-color:#9FF;
+		width:600px;
+		height:300px;
+		margin:0 auto;
+	}
+	
+	.buttonStyle {
+		background-color:#33F;	
+	}
+	
+	#square {
+		float:left;
+		height:100px;
+		width:100px;
+		background-color:#C36;
+		position:absolute;
+		left:800px;
+		top:10px;
+	}
+	
+	#square2 {
+		height:100px;
+		width:100px;
+		background-color:#C36;
+	}
+
+</style>
+</head>
+
+<body>
+
+<div id="bigbox">
+	<div id="box"><p id="text"> </p></div>
+    <div id="square"><p id="sqaure1">I will be resized later</p></div><br />
+    <button id="butt">Button label</button>
+    
+</div>
+<div id="square2">I will stay inside my parent div once dropped</div>
+<br />
+<div id="accord">
+<h3>Subtext</h3>
+<div>This is a simple example of accordion.</div>
+<h3>Subtext</h3>
+<div> This whole page has used jQueryUI. </div>
+<h3>Subtext</h3>
+<div>There is alot of useful functionalities of jQuery.</div>
+</div>
+
+<br />
+
+<h4>Favourate food which can be sorted by dragging</h4>
+<ul id="sort">
+	<li>Pasta</li>
+    <li>Burger</li>
+    <li>Choupsey</li>
+    <li>Fried rice</li>
+</ul>
+<script>
+	$("#box").draggable({containment:"parent", cursor: "crosshair", opacity:0.60, revert:true, revertDuration:1000,
+		drag: function() {
+			$("#text").html("I am being dragged");
+		},
+		stop: function() {
+			$("#text").html("");
+		}
+	});
+	
+	$( "#butt" ).button();
+	$("#square").draggable({containment:"parent", opacity:0.80, revert:true, 
+	drag: function() {
+			$("#sqaure1").html("I am being dragged");
+	}, stop: function() {
+			$("#sqaure1").html("I will be resized later");
+	}
+		});
+		
+	$("#square").resizable({ resize: function() {
+		$("#sqaure1").html("I am being resized"); }
+	});
+	
+	$("#square2").draggable({revert:"invalid"});
+	
+	$("#bigbox").droppable({drop:function(ui, event) {
+			$("#square2").css("background-color","#F66");
+			        $( this )
+          .addClass( "ui-state-highlight" )
+		}
+	});
+	
+	$("#accord").accordion({collapsible: true});
+	
+	$("#sort").sortable();
+</script>
+
+</body>
+</html>

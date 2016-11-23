@@ -1,0 +1,53 @@
+@charset "utf-8";
+.red {
+	height:100px;
+	width:100px;
+	background-color:red;
+    margin:20px;
+	float:left;
+}
+
+#green {
+	height:100px;
+	width:100px;
+	border-radius:100px;
+	background-color:green;
+	margin:20px;
+	float:left;
+}
+
+#blue {
+	height:100px;
+	width:200px;
+	background-color:blue;
+	margin:20px;
+	float:left;
+}
+
+#purple {
+	height:100px;
+	width:150px;
+	background-color:#309;
+	margin:20px;
+	float:left;
+}
+
+.clear {
+	clear:both;	
+}
+
+li {
+	background-color:#66F;	
+	list-style:none;
+	margin:10px;
+	width:70px;
+}
+
+#button {
+	background-color:#666;
+	border-radius:5px;
+	border-color:#000;
+	font-weight:bold;
+	padding:3px;
+}/* CSS Document */
+

@@ -26,7 +26,14 @@
 	
 	.alertBox {
 		margin-top:10px;
-		padding:3px 0 3px 5px;
+		padding:3px 0 3px 10px;
+		border-radius:3px;
+		display:none;
+	}
+	
+	#errorBox{
+		margin-top:10px;
+		text-align:center;
 		border-radius:3px;
 		display:none;
 	}
@@ -55,9 +62,12 @@
                       </div>
                   
                  </div>
-                           <div class="alert-success alertBox">
+                           <div class="alert alert-success alertBox">
                           	<p id="report" class="lead">Something will come here</p>
-                          </div>    
+                          </div> 
+                          <div class="alert alert-danger" id="errorBox">
+                          	<p id="report" class="lead">Location not found</p>
+                          </div>  
             </div>
 
         </div>
@@ -75,8 +85,16 @@
 	        }
 	        else {
 	            $.get("scraper.php?city="+$("#myCity").val(), function(data) {
-	    	    	$(".alertBox").css("display","block");
-	    	    	$("#report").html(data);
+	            	if(data=="")
+	            	{
+	            		$("#errorBox").css("display","block");
+	            		$(".alertBox").hide();
+	            	}
+	            	else {
+	    	    		$(".alertBox").css("display","block");
+	    	    		$("#report").html(data);
+	    	    		$("#errorBox").hide();
+	    	    	}
 	    	    });
 	    	}
 

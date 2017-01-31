@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+<head>
+<title>Make a list</title>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="/assets/todo-list.js" ></script>
+<link href="/assets/styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Job List </h1>
+
+  <div id=todo-table>
+      <form>
+      <input id="task" type="text" name="todo" placeholder="Add a task" />
+      <button type="submit">Add a task</button>
+      <ul>
+        <% for(var i=0;i<todos.length;i++) { %>
+          <li><%= todos[i].item %></li>
+        <%}%>
+
+      </ul>
+    </form>
+  </div>
+</body>
+
+</html>

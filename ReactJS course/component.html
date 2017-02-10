@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title> Learning React.js</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js">
+    </script>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="jumbotron"></div>
+      </div>
+    </div>
+  </div>
+  <script type="text/babel">
+    function formatName(user) {
+      return user.first+ ' '+ user.last;
+    }
+
+    const user= {
+      first:'Pinak',
+      last:'Das'
+    };
+    var Jumbo=React.createClass({
+      getDefaultProps: function(){
+        return {
+          text:"Every day I am learning something new. React Js is great"
+        }
+      },
+      render:function() {
+        return(
+          <div>
+            <div className="jumbotron">
+              <h1>{this.props.title} </h1>
+              <p>{this.props.text}</p>
+              <p>Hello, {formatName(user)}! </p>
+            </div>
+          </div>
+        )
+      }
+    });
+    ReactDOM.render(
+      <Jumbo title="This is set as property using React Js"/>, document.getElementById('jumbotron')
+    );
+  </script>
+</body>
+</html>

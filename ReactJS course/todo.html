@@ -1,0 +1,80 @@
+<html>
+<head>
+    <title> Learning React.js</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js">
+    </script>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="root"></div>
+        <div id="app"></div>
+      </div>
+    </div>
+  </div>
+  <script type="text/babel">
+
+    var TodoForm = React.createClass({
+        render: function () {
+            return (
+                <div>
+                  to do Form
+                </div>
+            );
+        }
+    });
+
+    var TodoList = React.createClass({
+        render: function () {
+            return (
+                <div>
+                  <ul className="list-group">
+                   { this.props.todos.map(todo=> {
+                      return <li className="list-group-item" todo={todo} key={todo.id}>{todo.name}</li>
+                     })
+                  }
+                  </ul>
+                </div>
+            );
+        }
+    });
+
+    var Quotesection = React.createClass({
+      getInitialState:function(){
+        return {
+          title:'Lists of work for the day',
+          todos:[{
+            'id':1,
+            'name':'Go Shopping'
+          },
+          {
+            'id':2,
+            'name':'Attend meeting'
+          },
+          {
+            'id':3,
+            'name':'Buy flowers for Manali'
+          }
+         ]
+        }
+      },
+        render:function () {
+            return(
+              <div>
+                <TodoForm />
+                <h2>{this.state.title}</h2>
+                <TodoList todos={this.state.todos} />
+              </div>
+            );
+        }
+    });
+
+    ReactDOM.render(<Quotesection/>, document.getElementById('app'));
+  </script>
+</body>
+</html>

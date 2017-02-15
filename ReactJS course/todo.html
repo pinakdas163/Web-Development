@@ -7,6 +7,17 @@
     <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js">
     </script>
+
+    <style>
+      body {
+        margin-top: 50px;
+      }
+      .delete {
+        float:right;
+        color:red;
+      }
+    </style>
+
 </head>
 <body>
   <div class="container">
@@ -23,9 +34,39 @@
         render: function () {
             return (
                 <div>
-                  to do Form
+                  <form onSubmit={this.onSubmit}>
+                    <input type="text" ref="text" placeholder="Add items here.." value={this.props.name}
+                    onChange={this.onChange} className="form-control"/>
+                  </form>
                 </div>
             );
+        },
+
+        onChange: function (e) {
+          this.props.changeText(e.target.value);
+          //console.log("text changing");
+        },
+
+        onSubmit: function(e) {
+          e.preventDefault();
+          var text= this.refs.text.value.trim();
+          if(!text)
+          {
+            alert('Please enter something');
+            return;
+          }
+          if(this.props.isEdit){
+            var updatedtodo= {
+              id:this.props.isEdit,
+              name:text
+            }
+            this.props.updatedTodo(updatedtodo);
+          }
+          else {
+            this.props.addTodo(text);
+          }
+
+          this.refs.name.value='';
         }
     });
 
@@ -35,12 +76,24 @@
                 <div>
                   <ul className="list-group">
                    { this.props.todos.map(todo=> {
-                      return <li className="list-group-item" todo={todo} key={todo.id}>{todo.name}</li>
+                      return <li className="list-group-item" todo={todo} key={todo.id}>
+                      <span onClick={this.onEdit.bind(this,todo)}>
+                      {todo.name}</span>
+                        <a onClick={this.onDelete.bind(this,todo)} href="#" className="delete">x</a>
+                      </li>
                      })
                   }
                   </ul>
                 </div>
             );
+        },
+
+        onDelete(todo) {
+          //console.log(todo);
+          this.props.deletebutton(todo);
+        },
+        onEdit(todo) {
+          this.props.edititem(todo);
         }
     });
 
@@ -50,14 +103,17 @@
           title:'Lists of work for the day',
           todos:[{
             'id':1,
+            'isEdit':0,
             'name':'Go Shopping'
           },
           {
             'id':2,
+            'isEdit':0,
             'name':'Attend meeting'
           },
           {
             'id':3,
+            'isEdit':0,
             'name':'Buy flowers for Manali'
           }
          ]
@@ -66,12 +122,61 @@
         render:function () {
             return(
               <div>
-                <TodoForm />
+                <TodoForm {...this.state}
+                 changeText={this.handletext}
+                addTodo={this.textAddTo}
+                updatedTodo={this.handleupdate}
+                />
                 <h2>{this.state.title}</h2>
-                <TodoList todos={this.state.todos} />
+                <TodoList {...this.state} deletebutton={this.handletodo}
+                  edititem={this.handleedit}
+                />
               </div>
             );
-        }
+        },
+        handleupdate:function(todo) {
+          console.log(todo);
+          var todoitem= this.state.todos;
+          for(var i=0;i<todoitem.length;i++)
+          {
+            if(todoitem[i].id==todo.id)
+            {
+              todoitem.splice(i,1);
+            }
+          }
+          todoitem.push(todo);
+          this.setState({todos:todoitem});
+        },
+
+        handletext:function(name) {
+          this.setState({name:name});
+        },
+        handleedit:function(todo){
+          this.setState({
+            name:todo.name,
+            isEdit:todo.id
+          });
+        },
+
+        handletodo: function(todo) {
+          var todoitem= this.state.todos;
+          for(var i=0;i<todoitem.length;i++)
+          {
+            if(todoitem[i].id==todo.id)
+            {
+              todoitem.splice(i,1);
+            }
+          }
+          this.setState({todos:todoitem});
+        },
+
+        textAddTo: function(text) {
+          var newtodo= {
+            id:this.state.todos.length+1,
+            name:text
+          }
+          this.setState({todos:this.state.todos.concat(newtodo)});
+        },
     });
 
     ReactDOM.render(<Quotesection/>, document.getElementById('app'));
